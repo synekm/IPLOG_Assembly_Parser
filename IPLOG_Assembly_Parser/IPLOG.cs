@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace IPLOG_Assembly_Parser
+﻿namespace IPLOG_Assembly_Parser
 {
     internal class Module
     {
