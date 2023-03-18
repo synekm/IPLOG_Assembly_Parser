@@ -6,7 +6,13 @@ using System.Threading.Tasks;
 
 namespace IPLOG_Assembly_Parser
 {
-    internal class IOModule : IFModule
+    internal class Module
+    {
+        public int inputs;
+        public int outputs;
+    }
+
+    internal class IOModule : Module
     {
         public int address;
         public IFModule IFModule;
@@ -20,11 +26,8 @@ namespace IPLOG_Assembly_Parser
         }
     }
 
-    internal class IFModule
+    internal class IFModule : Module
     {
-        public int inputs;
-        public int outputs;
-
         public IFModule(int inputs, int outputs)
         {
             this.inputs = inputs;
