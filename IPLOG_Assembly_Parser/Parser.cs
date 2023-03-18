@@ -15,15 +15,12 @@
 
         private void FileRead()
         {
-            string line;
             try
             {
                 StreamReader sr = new(pathToFile);
-                line = sr.ReadLine();
-                while (line != null)
+                while (sr.ReadLine() != null)
                 {
-                    lines.Add(line);
-                    line = sr.ReadLine();
+                    lines.Add(sr.ReadLine());
                 }
                 sr.Close();
             }
