@@ -7,10 +7,7 @@ namespace IPLOG_Assembly_Parser
         readonly private static string pathToFile = "C:/source.txt";
         readonly Parser parser = new(pathToFile);
 
-        public Form1()
-        {
-            InitializeComponent();
-        }
+        public Form1() { InitializeComponent(); }
 
         private void BttParse_Click(object sender, EventArgs e)
         {
@@ -29,14 +26,8 @@ namespace IPLOG_Assembly_Parser
             TreeNode[] nodes = new TreeNode[IOModules.Count];
             for (int index = 0; index < IOModules.Count; index++)
             {
-                if (IOModules[index].IFModule.inputs == 0)
-                {
-                    nodes[index] = new TreeNode("IO addr: " + index.ToString());
-                }
-                else
-                {
-                    nodes[index] = new TreeNode("IO addr: " + index.ToString(), AddIFModule());
-                }
+                if (IOModules[index].IFModule.inputs == 0) { nodes[index] = new TreeNode("IO addr: " + index.ToString()); }
+                else { nodes[index] = new TreeNode("IO addr: " + index.ToString(), AddIFModule()); }
             }
 
             return nodes;
@@ -71,6 +62,7 @@ namespace IPLOG_Assembly_Parser
                         IFModules++;
                     }
                 }
+
                 labelInputsCount.Text = inputs.ToString();
                 labelOutputsCount.Text = outputs.ToString();
                 labelIFModulesCount.Text = IFModules.ToString();
@@ -92,42 +84,24 @@ namespace IPLOG_Assembly_Parser
 
         private static string CheckForOutputs(List<IOModule> IOModules, TreeNode selectedNode)
         {
-            if (CheckForIFModule(IOModules, selectedNode) == "0")
-            {
-                return IOModules[Int32.Parse(Regex.Match(selectedNode.Text, @"\d+").Value)].outputs.ToString();
-            }
-            else
-            {
-                return (IOModules[Int32.Parse(Regex.Match(selectedNode.Text, @"\d+").Value)].outputs
-                      + IOModules[Int32.Parse(Regex.Match(selectedNode.Text, @"\d+").Value)].IFModule.outputs)
-                      .ToString();
-            }
+            if (CheckForIFModule(IOModules, selectedNode) == "0") { return IOModules[Int32.Parse(Regex.Match(selectedNode.Text, @"\d+").Value)].outputs.ToString(); }
+            return (IOModules[Int32.Parse(Regex.Match(selectedNode.Text, @"\d+").Value)].outputs
+                    + IOModules[Int32.Parse(Regex.Match(selectedNode.Text, @"\d+").Value)].IFModule.outputs)
+                    .ToString();
         }
 
         private static string CheckForIFModule(List<IOModule> IOModules, TreeNode selectedNode)
         {
-            if (IOModules[Int32.Parse(Regex.Match(selectedNode.Text, @"\d+").Value)].IFModule.inputs == 0)
-            {
-                return "0";
-            }
-            else
-            {
-                return "1";
-            }
+            if (IOModules[Int32.Parse(Regex.Match(selectedNode.Text, @"\d+").Value)].IFModule.inputs == 0) { return "0"; }
+            return "1";
         }
 
         private static string CheckForInputs(List<IOModule> IOModules, TreeNode selectedNode)
         {
-            if (CheckForIFModule(IOModules, selectedNode) == "0")
-            {
-                return IOModules[Int32.Parse(Regex.Match(selectedNode.Text, @"\d+").Value)].inputs.ToString();
-            }
-            else
-            {
-                return (IOModules[Int32.Parse(Regex.Match(selectedNode.Text, @"\d+").Value)].inputs
-                      + IOModules[Int32.Parse(Regex.Match(selectedNode.Text, @"\d+").Value)].IFModule.inputs)
-                      .ToString();
-            }
+            if (CheckForIFModule(IOModules, selectedNode) == "0") { return IOModules[Int32.Parse(Regex.Match(selectedNode.Text, @"\d+").Value)].inputs.ToString(); }
+            return (IOModules[Int32.Parse(Regex.Match(selectedNode.Text, @"\d+").Value)].inputs
+                    + IOModules[Int32.Parse(Regex.Match(selectedNode.Text, @"\d+").Value)].IFModule.inputs)
+                    .ToString();
         }
     }
 }
