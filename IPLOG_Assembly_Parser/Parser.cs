@@ -18,16 +18,10 @@
             try
             {
                 StreamReader sr = new(pathToFile);
-                while (sr.ReadLine() != null)
-                {
-                    lines.Add(sr.ReadLine());
-                }
+                while (sr.ReadLine() != null) { lines.Add(sr.ReadLine()); }
                 sr.Close();
             }
-            catch (Exception e)
-            {
-                Console.WriteLine("Exception: " + e.Message);
-            }
+            catch (Exception e) { Console.WriteLine("Exception: " + e.Message); }
         }
 
         private void Parse()
@@ -38,10 +32,7 @@
 
             for (int index = 0; index < lines.Count; index++)
             {
-                if (lines[index].Length > 9)
-                {
-                    trimmedLines.Add(lines[index].Remove(0, 6));
-                }
+                if (lines[index].Length > 9) { trimmedLines.Add(lines[index].Remove(0, 6)); }
             }
             for (int index = 0; index < trimmedLines.Count; index++)
             {
@@ -66,22 +57,10 @@
                             IO.Add(addressIndex.ToString(),
                                 new Dictionary<string, int>{ {"i", 0}, {"o", 0}, {"if/i", 0}, {"if/o", 0} });
                         }
-                        if (distinctLines[lineIndex].Contains("if/o/"))
-                        {
-                            IO[addressIndex.ToString()]["if/o"]++;
-                        }
-                        else if (distinctLines[lineIndex].Contains("/o/"))
-                        {
-                            IO[addressIndex.ToString()]["o"]++;
-                        }
-                        else if (distinctLines[lineIndex].Contains("/if/i/"))
-                        {
-                            IO[addressIndex.ToString()]["if/i"]++;
-                        }
-                        else if (distinctLines[lineIndex].Contains("/i/"))
-                        {
-                            IO[addressIndex.ToString()]["i"]++;
-                        }
+                        if (distinctLines[lineIndex].Contains("if/o/")) { IO[addressIndex.ToString()]["if/o"]++; }
+                        else if (distinctLines[lineIndex].Contains("/o/")) { IO[addressIndex.ToString()]["o"]++; }
+                        else if (distinctLines[lineIndex].Contains("/if/i/")) { IO[addressIndex.ToString()]["if/i"]++; }
+                        else if (distinctLines[lineIndex].Contains("/i/")) { IO[addressIndex.ToString()]["i"]++; }
                     }
                 }
             }
@@ -89,14 +68,8 @@
 
         private static int FindNextChar(char character, int startPosition, string whereToSearch)
         {
-            if (whereToSearch.IndexOf(character, startPosition) == -1)
-            {
-                return whereToSearch.Length;
-            }
-            else
-            {
-                return whereToSearch.IndexOf(character, startPosition);
-            }
+            if (whereToSearch.IndexOf(character, startPosition) == -1) { return whereToSearch.Length; }
+            return whereToSearch.IndexOf(character, startPosition);
         }
 
         internal List<IOModule> ConvertIOToIPLOG()
